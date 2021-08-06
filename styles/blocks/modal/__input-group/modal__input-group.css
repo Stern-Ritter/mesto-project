@@ -1,0 +1,11 @@
+.modal__input-group {
+  padding: 0 0 45px 0;
+  margin: 0;
+  border: none;
+}
+
+@media (min-width: 620px) {
+  .modal__input-group {
+    padding-bottom: 48px;
+  }
+}

@@ -1,0 +1,17 @@
+.button_type_like-disabled {
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../../images/like-button-disabled.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.button_type_like-disabled:hover {
+  opacity: 0.5;
+}
+
+.button_type_like-disabled:active {
+  opacity: 1;
+  background-image: url(../../../../images/like-button-active.svg);
+}

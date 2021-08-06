@@ -1,0 +1,15 @@
+.footer {
+  padding-bottom: 36px;
+}
+
+@media (min-width: 620px) {
+  .footer {
+    padding-bottom: 52px;
+  }
+}
+
+@media (min-width: 900px) {
+  .footer {
+    padding-bottom: 60px;
+  }
+}

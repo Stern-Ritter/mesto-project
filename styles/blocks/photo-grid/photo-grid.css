@@ -1,0 +1,15 @@
+.photo-grid {
+  padding-bottom: 48px;
+}
+
+@media (min-width: 620px) {
+  .photo-grid {
+    padding-bottom: 56px;
+  }
+}
+
+@media (min-width: 900px) {
+  .photo-grid {
+    padding-bottom: 67px;
+  }
+}

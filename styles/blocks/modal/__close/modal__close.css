@@ -1,0 +1,14 @@
+.modal__close {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  background-color: transparent;
+  border: none;
+}
+
+@media (min-width: 620px) {
+  .modal__close {
+    top: -40px;
+    right: -40px;
+  }
+}

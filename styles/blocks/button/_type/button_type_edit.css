@@ -1,0 +1,31 @@
+.button_type_edit {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.button_type_edit::after {
+  content: "";
+  width: 7.5px;
+  height: 7.5px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(../../../../images/edit-button.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 620px) {
+  .button_type_edit {
+    width: 24px;
+    height: 24px;
+  }
+
+  .button_type_edit::after {
+    width: 10px;
+    height: 10px;
+  }
+}

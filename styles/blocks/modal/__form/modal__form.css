@@ -1,0 +1,9 @@
+.modal__form {
+  max-width: 238px;
+}
+
+@media (min-width: 620px) {
+  .modal__form {
+    max-width: 358px;
+  }
+}

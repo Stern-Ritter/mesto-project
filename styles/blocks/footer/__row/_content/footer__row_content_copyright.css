@@ -1,0 +1,15 @@
+.footer__row_content_copyright {
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.22;
+  color: #545454;
+}
+
+@media (min-width: 620px) {
+  .footer__row_content_copyright {
+    font-size: 18px;
+  }
+}

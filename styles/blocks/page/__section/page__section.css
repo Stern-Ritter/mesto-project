@@ -1,0 +1,11 @@
+.page__section {
+  padding-left: 19px;
+  padding-right: 19px;
+}
+
+@media (min-width: 900px) {
+  .page__section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

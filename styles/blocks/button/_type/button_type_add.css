@@ -1,0 +1,30 @@
+.button_type_add {
+  width: 282px;
+  height: 50px;
+  position: relative;
+}
+
+.button_type_add::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: url(../../../../images/add-button.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 620px) {
+  .button_type_add {
+    width: 150px;
+  }
+
+  .button_type_add::after {
+    width: 22px;
+    height: 22px;
+  }
+}
