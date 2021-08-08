@@ -1,0 +1,10 @@
+.logo_place_header {
+  margin-left: 8px;
+  background-image: url("../../../images/logo-dark-theme.svg");
+}
+
+@media (min-width: 960px) {
+  .logo_place_header {
+    margin-left: 0;
+  }
+}

@@ -7,7 +7,7 @@
     <meta name="keywords" content="HTML5, CSS" />
     <meta name="author" content="Константин Фадеев" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="./styles/pages/index.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
   <body class="page">
@@ -22,132 +22,128 @@
           src="./images/explorer.jpg"
           alt="Картинка пользователя"
         />
-        <ul class="profile__info-list">
-          <li class="profile__info-list-item">
-            <span class="profile__user-name">Жак-Ив Кусто</span>
+        <div class="profile__info">
+          <div class="profile__info-holder">
+            <h1 class="profile__user-name">Жак-Ив Кусто</h1>
             <button
-              class="button button_type_edit button_opacity profile__edit-btn"
+              class="button button_type_edit profile__edit-btn"
+              type="button"
             ></button>
-          </li>
-          <li class="profile__info-list-item">
-            <span class="profile__user-subline">Исследователь океана</span>
-          </li>
-        </ul>
+          </div>
+          <p class="profile__user-subline">Исследователь океана</p>
+        </div>
         <button
-          class="button button_type_add button_opacity profile__add-btn"
+          class="button button_type_add profile__add-btn"
+          type="button"
         ></button>
       </section>
 
       <section class="photo-grid page__section">
         <ul class="photo-grid__list">
           <li class="photo-grid__list-item">
-            <figure class="place">
+            <article class="place">
               <img
                 class="place__image"
                 src="./images/photo-grid-karachayevsk.jpg"
                 alt="Карачаевск"
               />
-              <figcaption class="place__image-caption">
-                <span class="place__image-name">Карачаевск</span>
+              <div class="place__image-caption">
+                <h2 class="place__image-name">Карачаевск</h2>
                 <button
-                  class="button button_type_like-active place__like-btn"
+                  class="button place__like-btn place__like-btn_active"
+                  type="button"
                 ></button>
-              </figcaption>
-            </figure>
+              </div>
+            </article>
           </li>
           <li class="photo-grid__list-item">
-            <figure class="place">
+            <article class="place">
               <img
                 class="place__image"
                 src="./images/photo-grid-elbrus.jpg"
                 alt="Гора Эльбрус"
               />
-              <figcaption class="place__image-caption">
-                <span class="place__image-name">Гора Эльбрус</span>
-                <button
-                  class="button button_type_like-disabled place__like-btn"
-                ></button>
-              </figcaption>
-            </figure>
+              <div class="place__image-caption">
+                <h2 class="place__image-name">Гора Эльбрус</h2>
+                <button class="button place__like-btn" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="photo-grid__list-item">
-            <figure class="place">
+            <article class="place">
               <img
                 class="place__image"
                 src="./images/photo-grid-dombay.jpg"
                 alt="Домбай"
               />
-              <figcaption class="place__image-caption">
-                <span class="place__image-name">Домбай</span>
-                <button
-                  class="button button_type_like-disabled place__like-btn"
-                ></button>
-              </figcaption>
-            </figure>
+              <div class="place__image-caption">
+                <h2 class="place__image-name">Домбай</h2>
+                <button class="button place__like-btn" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="photo-grid__list-item">
-            <figure class="place">
+            <article class="place">
               <img
                 class="place__image"
                 src="./images/photo-grid-elbrus.jpg"
                 alt="Гора Эльбрус"
               />
-              <figcaption class="place__image-caption">
-                <span class="place__image-name">Гора Эльбрус</span>
-                <button
-                  class="button button_type_like-disabled place__like-btn"
-                ></button>
-              </figcaption>
-            </figure>
+              <div class="place__image-caption">
+                <h2 class="place__image-name">Гора Эльбрус</h2>
+                <button class="button place__like-btn" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="photo-grid__list-item">
-            <figure class="place">
+            <article class="place">
               <img
                 class="place__image"
                 src="./images/photo-grid-dombay.jpg"
                 alt="Домбай"
               />
-              <figcaption class="place__image-caption">
-                <span class="place__image-name">Домбай</span>
-                <button
-                  class="button button_type_like-disabled place__like-btn"
-                ></button>
-              </figcaption>
-            </figure>
+              <div class="place__image-caption">
+                <h2 class="place__image-name">Домбай</h2>
+                <button class="button place__like-btn" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="photo-grid__list-item">
-            <figure class="place">
+            <article class="place">
               <img
                 class="place__image"
                 src="./images/photo-grid-karachayevsk.jpg"
                 alt="Карачаевск"
               />
-              <figcaption class="place__image-caption">
-                <span class="place__image-name">Карачаево-Черкессия</span>
-                <button
-                  class="button button_type_like-disabled place__like-btn"
-                ></button>
-              </figcaption>
-            </figure>
+              <div class="place__image-caption">
+                <h2 class="place__image-name">Карачаево-Черкессия</h2>
+                <button class="button place__like-btn" type="button"></button>
+              </div>
+            </article>
           </li>
         </ul>
       </section>
     </main>
 
     <footer class="footer page__section">
-      <p class="footer__row footer__row_content_copyright">
-        &copy; 2021 Mesto Russia
-      </p>
+      <p class="footer__row">&copy; 2021 Mesto Russia</p>
     </footer>
 
-    <div class="modal modal_opened">
+    <div class="modal">
       <div class="modal__wrapper">
         <button
-          class="modal__close button button_type_close button_opacity"
+          class="modal__close button button_type_close"
+          type="button"
           title="Закрыть"
         ></button>
-        <h4 class="modal__header">Редактировать профиль</h4>
-        <form action="#" method="post" autocomplete="off" class="modal__form">
+        <h2 class="modal__header">Редактировать профиль</h2>
+        <form
+          name="user-edit-form"
+          action="#"
+          method="post"
+          autocomplete="off"
+          class="modal__form"
+        >
           <fieldset class="modal__input-group">
             <input
               class="modal__input"

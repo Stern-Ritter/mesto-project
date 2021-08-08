@@ -1,0 +1,10 @@
+.profile__info {
+  margin-bottom: 34px;
+}
+
+@media (min-width: 900px) {
+  .profile__info {
+    margin-bottom: 0;
+    flex-grow: 1;
+  }
+}

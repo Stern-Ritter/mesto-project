@@ -1,0 +1,11 @@
+.profile__info-holder {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 900px) {
+  .profile__info-holder {
+    margin-bottom: 6px;
+  }
+}
