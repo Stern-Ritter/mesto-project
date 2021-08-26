@@ -39,89 +39,7 @@
       </section>
 
       <section class="photo-grid page__section">
-        <ul class="photo-grid__list">
-          <li class="photo-grid__list-item">
-            <article class="place">
-              <img
-                class="place__image"
-                src="./images/photo-grid-karachayevsk.jpg"
-                alt="Карачаевск"
-              />
-              <div class="place__image-caption">
-                <h2 class="place__image-name">Карачаевск</h2>
-                <button
-                  class="button place__like-btn place__like-btn_active"
-                  type="button"
-                ></button>
-              </div>
-            </article>
-          </li>
-          <li class="photo-grid__list-item">
-            <article class="place">
-              <img
-                class="place__image"
-                src="./images/photo-grid-elbrus.jpg"
-                alt="Гора Эльбрус"
-              />
-              <div class="place__image-caption">
-                <h2 class="place__image-name">Гора Эльбрус</h2>
-                <button class="button place__like-btn" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="photo-grid__list-item">
-            <article class="place">
-              <img
-                class="place__image"
-                src="./images/photo-grid-dombay.jpg"
-                alt="Домбай"
-              />
-              <div class="place__image-caption">
-                <h2 class="place__image-name">Домбай</h2>
-                <button class="button place__like-btn" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="photo-grid__list-item">
-            <article class="place">
-              <img
-                class="place__image"
-                src="./images/photo-grid-elbrus.jpg"
-                alt="Гора Эльбрус"
-              />
-              <div class="place__image-caption">
-                <h2 class="place__image-name">Гора Эльбрус</h2>
-                <button class="button place__like-btn" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="photo-grid__list-item">
-            <article class="place">
-              <img
-                class="place__image"
-                src="./images/photo-grid-dombay.jpg"
-                alt="Домбай"
-              />
-              <div class="place__image-caption">
-                <h2 class="place__image-name">Домбай</h2>
-                <button class="button place__like-btn" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="photo-grid__list-item">
-            <article class="place">
-              <img
-                class="place__image"
-                src="./images/photo-grid-karachayevsk.jpg"
-                alt="Карачаевск"
-              />
-              <div class="place__image-caption">
-                <h2 class="place__image-name">Карачаево-Черкессия</h2>
-                <button class="button place__like-btn" type="button"></button>
-              </div>
-            </article>
-          </li>
-        </ul>
+        <ul class="photo-grid__list"></ul>
       </section>
     </main>
 
@@ -129,7 +47,7 @@
       <p class="footer__row">&copy; 2021 Mesto Russia</p>
     </footer>
 
-    <div class="modal">
+    <div class="modal modal_type_user-edit">
       <div class="modal__wrapper">
         <button
           class="modal__close button button_type_close"
@@ -150,19 +68,78 @@
               type="text"
               name="user-name"
               placeholder="Имя"
-              value="Жак-Ив Кусто"
             />
             <input
               class="modal__input"
               type="text"
               name="user-subline"
               placeholder="О себе"
-              value="Исследователь океана"
             />
           </fieldset>
           <input class="modal__save-btn" type="submit" value="Сохранить" />
         </form>
       </div>
     </div>
+
+    <div class="modal modal_type_place-add">
+      <div class="modal__wrapper">
+        <button
+          class="modal__close button button_type_close"
+          type="button"
+          title="Закрыть"
+        ></button>
+        <h2 class="modal__header">Новое место</h2>
+        <form
+          name="place-add-form"
+          action="#"
+          method="post"
+          autocomplete="off"
+          class="modal__form"
+        >
+          <fieldset class="modal__input-group">
+            <input
+              class="modal__input"
+              type="text"
+              name="place-name"
+              placeholder="Название"
+            />
+            <input
+              class="modal__input"
+              type="text"
+              name="place-img-link"
+              placeholder="Ссылка на картинку"
+            />
+          </fieldset>
+          <input class="modal__save-btn" type="submit" value="Создать" />
+        </form>
+      </div>
+    </div>
+
+    <div class="modal modal_type_place-show">
+      <figure class="modal__image-holder">
+        <button
+          class="modal__close button button_type_close"
+          type="button"
+          title="Закрыть"
+        ></button>
+        <img class="modal__image" src="#" alt="Место" />
+        <figcaption class="modal__image-caption">Место</figcaption>
+      </figure>
+    </div>
+
+    <template id="photo-grid-item">
+      <li class="photo-grid__list-item">
+        <article class="place">
+          <img class="place__image" />
+          <button class="button place__delete-btn" type="button"></button>
+          <div class="place__image-caption">
+            <h2 class="place__image-name"></h2>
+            <button class="button place__like-btn" type="button"></button>
+          </div>
+        </article>
+      </li>
+    </template>
+
+    <script src="index.js"></script>
   </body>
 </html>

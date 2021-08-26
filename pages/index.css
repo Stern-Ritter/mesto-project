@@ -25,6 +25,7 @@
 @import url(../blocks/place/__image-name/place__image-name.css);
 @import url(../blocks/place/__like-btn/place__like-btn.css);
 @import url(../blocks/place/__like-btn/_active/place__like-btn_active.css);
+@import url(../blocks/place/__delete-btn/place__delete-btn.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__row/footer__row.css);
@@ -38,6 +39,9 @@
 @import url(../blocks/button/_type/button_type_close.css);
 
 @import url(../blocks/modal/modal.css);
+@import url(../blocks/modal/_type/modal_type_user-edit.css);
+@import url(../blocks/modal/_type/modal_type_place-add.css);
+@import url(../blocks/modal/_type/modal_type_place-show.css);
 @import url(../blocks/modal/_opened/modal_opened.css);
 @import url(../blocks/modal/__wrapper/modal__wrapper.css);
 @import url(../blocks/modal/__close/modal__close.css);
@@ -46,3 +50,6 @@
 @import url(../blocks/modal/__input-group/modal__input-group.css);
 @import url(../blocks/modal/__input/modal__input.css);
 @import url(../blocks/modal/__save-btn/modal__save-btn.css);
+@import url(../blocks/modal/__image-holder/modal__image-holder.css);
+@import url(../blocks/modal/__image/modal__image.css);
+@import url(../blocks/modal/__image-caption/modal__image-caption.css);
