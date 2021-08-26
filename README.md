@@ -12,8 +12,9 @@
 * grid,
 * БЭМ, 
 * адаптивная вёрстка,
-* модальные окна.
+* модальные окна,
+* JavaScript.
 
 **Github-pages**
 
-* [Ссылка на github-pages.](https://stern-ritter.github.io/mesto-project/)
+* [Ссылка на github-pages.](https://stern-ritter.github.io/mesto/)

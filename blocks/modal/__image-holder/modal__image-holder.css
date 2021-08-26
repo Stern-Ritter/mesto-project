@@ -1,0 +1,5 @@
+.modal__image-holder {
+  margin: auto;
+  position: relative;
+  transform: translateY(12px);
+}
