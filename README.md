@@ -17,4 +17,4 @@
 
 **Github-pages**
 
-* [Ссылка на github-pages.](https://stern-ritter.github.io/mesto/)
+* [Ссылка на github-pages.](https://stern-ritter.github.io/mesto-project/)
