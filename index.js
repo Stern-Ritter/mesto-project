@@ -15,10 +15,11 @@ const profileEditSaveBtn = profileEdit.querySelector('.modal__save-btn');
 
 // Модальное окно добавления новой карточки места
 const placeAdd = document.querySelector('.modal_type_place-add');
-const placeAddName = placeAdd.querySelector('.modal__input[name="place-name"]');
-const placeAddImgLink = placeAdd.querySelector('.modal__input[name="place-img-link"]');
+const placeAddForm = placeAdd.querySelector('.modal__form');
+const placeAddName = placeAddForm.querySelector('.modal__input[name="place-name"]');
+const placeAddImgLink = placeAddForm.querySelector('.modal__input[name="place-img-link"]');
+const placeAddSaveBtn = placeAddForm.querySelector('.modal__save-btn');
 const placeAddCloseBtn = placeAdd.querySelector('.modal__close');
-const placeAddSaveBtn = placeAdd.querySelector('.modal__save-btn');
 
 // Модальное окно с информацией о выбранном месте
 const placeShow = document.querySelector('.modal_type_place-show');
@@ -63,8 +64,8 @@ function openModal(modal) {
 }
 
 // Функция закрытия модального окна
-function closeModal(event) {
-  event.target.closest('.modal').classList.remove('modal_opened');
+function closeModal(modal) {
+  modal.classList.remove('modal_opened');
 }
 
 // Функция переключения состояния лайка
@@ -77,19 +78,16 @@ function removePlace(event) {
   event.target.closest('.photo-grid__list-item').remove();
 }
 
-// Функция очистки полей ввода формы
-function clearModal(event) {
-  const inputs = event.target.closest('.modal').querySelectorAll('.modal__input');
-  inputs.forEach((input) => input.value = '');
-}
-
-// Функция открытия модального окна с информации о выбранном месте
-function showPlace(event, modal) {
+// Функция открытия модального окна с информации о месте на основе переданных аргументов:
+// 1. 'modal' (DOM-элемент) - модальное окно;
+// 2. 'name' (String) - имя места;
+// 3. 'link' (String) - ссылка на изображение места на удаленном сервере.
+function showPlace(modal, name, link) {
   const image = modal.querySelector('.modal__image');
   const imageCaption = modal.querySelector('.modal__image-caption')
-  image.src = event.target.src;
-  image.alt = event.target.alt;
-  imageCaption.textContent = event.target.alt;
+  image.src = link;
+  image.alt = name;
+  imageCaption.textContent = name;
   openModal(modal);
 }
 
@@ -106,7 +104,8 @@ function createPhotoGridItem(name, link) {
   imageCaption.textContent = name;
 
   // Обработчик открытия модального окна с информацией о выбранном месте
-  photoGridItem.querySelector('.place__image').addEventListener('click', () => showPlace(event, placeShow));
+  photoGridItem.querySelector('.place__image')
+    .addEventListener('click',(event) => showPlace(placeShow, event.target.alt, event.target.src));
   // Обработчик лайка карточки места
   photoGridItem.querySelector('.place__like-btn').addEventListener('click', likePlace);
   // Обработчик удаления карточки места
@@ -116,14 +115,11 @@ function createPhotoGridItem(name, link) {
 }
 
 // Функция добавления карточки места в панель карточек на основе аргументов,
-// 1. position (String) - место в родительском контейнере для добавления элемента:
-// 'beforebegin' - перед самим элементом; 'afterbegin' - внутри элемента, перед его первым потомком;
-// 'beforeend' - внутри элемента, после его последнего потомка; 'afterend' - после самого элемента.
-// 2. parent (DOM-элемент) - родительский элемент
-// 3. cards (rest parameters, DOM-элементы) - добавляемые элементы
-function addPhotoGridItem(position, parent, ...cards) {
+// 1. parent (DOM-элемент) - родительский элемент
+// 2. cards (rest parameters, DOM-элементы) - добавляемые карточки мест
+function addPhotoGridItem(parent, ...cards) {
   cards.forEach((card) => {
-    parent.insertAdjacentElement(position, createPhotoGridItem(card.name, card.link));
+    parent.prepend(createPhotoGridItem(card.name, card.link));
   });
 }
 
@@ -137,7 +133,7 @@ profileEditBtn.addEventListener('click', () => {
 
 // Обработчик закрытия модального окна редактирования данных пользователя,
 // без сохранения результатов редактирования
-profileEditCloseBtn.addEventListener('click', closeModal);
+profileEditCloseBtn.addEventListener('click', () => closeModal(profileEdit));
 
 // Обработчик закрытия модального окна редактирования данных пользователя,
 // с сохранением результатов редактирования
@@ -145,7 +141,7 @@ profileEditSaveBtn.addEventListener('click', (event) => {
   event.preventDefault();
   profileUserName.textContent = profileEditUserName.value;
   profileUserSubline.textContent = profileEditSubline.value;
-  closeModal(event);
+  closeModal(profileEdit);
 });
 
 // Обработчик открытия модального окна добавления новой карточки места
@@ -153,19 +149,22 @@ profileAddBtn.addEventListener('click', () => openModal(placeAdd));
 
 // Обработчик закрытия модального окна добавления новой карточки места
 // без сохранения карточки
-placeAddCloseBtn.addEventListener('click', closeModal);
+placeAddCloseBtn.addEventListener('click', () => {
+  placeAddForm.reset();
+  closeModal(placeAdd)
+});
 
 // Обработчик закрытия модального окна добавления новой карточки места
 // с сохранением карточки
 placeAddSaveBtn.addEventListener('click', (event) => {
   event.preventDefault();
-  addPhotoGridItem('afterbegin', photoGridList, {name : placeAddName.value, link : placeAddImgLink.value});
-  clearModal(event);
-  closeModal(event);
+  addPhotoGridItem(photoGridList, {name : placeAddName.value, link : placeAddImgLink.value});
+  placeAddForm.reset();
+  closeModal(placeAdd);
 });
 
 // Обработчик закрытия модального окна с информацией о выбранном месте
-placeShowCloseBtn.addEventListener('click', closeModal);
+placeShowCloseBtn.addEventListener('click', () => closeModal(placeShow));
 
 // ** Начальная инициализация страницы
-addPhotoGridItem('beforeend', photoGridList, ...initialCards);
+addPhotoGridItem(photoGridList, ...initialCards);
