@@ -1,8 +1,10 @@
 .modal__save-btn {
   padding: 14px 0;
   width: 100%;
-  background: #000000;
+  box-sizing: border-box;
+  background-color: #000000;
   border-width: 0;
+  border-style: solid;
   border-radius: 2px;
   font-style: normal;
   font-weight: normal;

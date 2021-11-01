@@ -49,7 +49,11 @@
 @import url(../blocks/modal/__form/modal__form.css);
 @import url(../blocks/modal/__input-group/modal__input-group.css);
 @import url(../blocks/modal/__input/modal__input.css);
+@import url(../blocks/modal/__input/_type/modal__input_type_error.css);
+@import url(../blocks/modal/__input-error/modal__input-error.css);
+@import url(../blocks/modal/__input-error/_active/modal__input-error_active.css);
 @import url(../blocks/modal/__save-btn/modal__save-btn.css);
+@import url(../blocks/modal/__save-btn/_disabled/modal__save-btn_disabled.css);
 @import url(../blocks/modal/__image-holder/modal__image-holder.css);
 @import url(../blocks/modal/__image/modal__image.css);
 @import url(../blocks/modal/__image-caption/modal__image-caption.css);
