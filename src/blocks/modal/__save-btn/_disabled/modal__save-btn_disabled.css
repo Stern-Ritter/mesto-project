@@ -1,0 +1,6 @@
+.modal__save-btn_disabled {
+  background-color: transparent;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+}
