@@ -14,8 +14,8 @@ function hideInputError(form, input, options) {
   inputError.classList.remove(options.errorClass);
 }
 
-// Функция скрытия ошибки валидации поля ввода формы при ее закрытии
-export function clearInputErrorsOnClose(form, options) {
+// Функция скрытия ошибок валидации полей ввода формы при ее открытии
+export function clearInputErrors(form, options) {
   const inputs = Array.from(form.querySelectorAll(`.${options.inputSelector}`));
   inputs.forEach((input) => {
     hideInputError(form, input, options);

@@ -1,6 +1,6 @@
 import './index.css';
 import { addPhotoGridItem, removePhotoGridItem, likePhotoGridItem } from '../components/card.js';
-import { openModal, openPlaceModal, closeModal, closeModalOnOverlayClick } from '../components/modal.js';
+import { openModal, openPlaceModal, closeModal, closeModalOnOverlayClick, clearForm } from '../components/modal.js';
 import { enableValidation } from '../components/validate.js';
 import { profileClasses, cardClasses, modalClasses, initialCards } from '../components/constants.js';
 
@@ -39,6 +39,7 @@ const photoGridList = document.querySelector(`.${cardClasses.photoGridListClass}
 // * Обработчики модального окна редактирования данных пользователя
 // Обработчик открытия модального окна редактирования данных пользователя
 profileEditBtn.addEventListener('click', () => {
+  clearForm(profileEdit);
   openModal(profileEdit);
   profileEditUserName.value = profileUserName.textContent;
   profileEditSubline.value = profileUserSubline.textContent;
@@ -62,7 +63,10 @@ profileEdit.addEventListener('click', closeModalOnOverlayClick);
 
 // * Обработчики модального окна добавления новой карточки места
 // Обработчик открытия модального окна добавления новой карточки места
-profileAddBtn.addEventListener('click', () => openModal(placeAdd));
+profileAddBtn.addEventListener('click', () => {
+  clearForm(placeAdd);
+  openModal(placeAdd);
+});
 
 // Обработчик закрытия модального окна добавления новой карточки места,
 // без сохранения карточки
@@ -90,7 +94,7 @@ placeAdd.addEventListener('click', closeModalOnOverlayClick);
 // Обработчик удаления карточки места.
 photoGridList.addEventListener('click', (event) => {
   if (event.target.classList.contains(`${cardClasses.photoGridItemImgClass}`)) {
-    openPlaceModal(placeShow, event.target.alt, event.target.src);
+    openPlaceModal(event.target.alt, event.target.src);
   }
   if (event.target.classList.contains(`${cardClasses.photoGridItemLikeBtnClass}`)) {
     likePhotoGridItem(event);
