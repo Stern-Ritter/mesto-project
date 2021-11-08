@@ -1,0 +1,9 @@
+.modal__header_target_form {
+  margin: 0 0 75px 0;
+}
+
+@media (min-width: 620px) {
+  .modal__header_target_form {
+    margin-bottom: 52px;
+  }
+}

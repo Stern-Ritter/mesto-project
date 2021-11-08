@@ -57,3 +57,10 @@ export function openPlaceModal(name, link) {
   imageCaption.textContent = name;
   openModal(modalPlace);
 }
+
+// Функция изменения текста кнопки формы модального окна
+export function switchButtonText(button, text) {
+  const oldButtonText = button.value;
+  button.value = text;
+  return oldButtonText;
+}

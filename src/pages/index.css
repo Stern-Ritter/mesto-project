@@ -8,7 +8,9 @@
 @import url(../blocks/header/header.css);
 
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar-holder/profile__avatar-holder.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar-edit-btn/profile__avatar-edit-btn.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__info-holder/profile__info-holder.css);
 @import url(../blocks/profile/__user-name/profile__user-name.css);
@@ -23,9 +25,13 @@
 @import url(../blocks/place/__image/place__image.css);
 @import url(../blocks/place/__image-caption/place__image-caption.css);
 @import url(../blocks/place/__image-name/place__image-name.css);
+@import url(../blocks/place/__like-holder/place__like-holder.css);
 @import url(../blocks/place/__like-btn/place__like-btn.css);
 @import url(../blocks/place/__like-btn/_active/place__like-btn_active.css);
+@import url(../blocks/place/__like-count/place__like-count.css);
+@import url(../blocks/place/__like-count/_visible/place__like-count_visible.css);
 @import url(../blocks/place/__delete-btn/place__delete-btn.css);
+@import url(../blocks/place/__delete-btn/_visible/place__delete-btn_visible.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__row/footer__row.css);
@@ -42,10 +48,15 @@
 @import url(../blocks/modal/_type/modal_type_user-edit.css);
 @import url(../blocks/modal/_type/modal_type_place-add.css);
 @import url(../blocks/modal/_type/modal_type_place-show.css);
+@import url(../blocks/modal/_type/modal_type_avatar-update.css);
+@import url(../blocks/modal/_type/modal_type_card-delete.css);
 @import url(../blocks/modal/_opened/modal_opened.css);
 @import url(../blocks/modal/__wrapper/modal__wrapper.css);
 @import url(../blocks/modal/__close/modal__close.css);
 @import url(../blocks/modal/__header/modal__header.css);
+@import url(../blocks/modal/__header/_target/modal__header_target_form.css);
+@import url(../blocks/modal/__header/_target/modal__header_target_confirm.css);
+@import url(../blocks/modal/__accept-btn/modal__accept-btn.css);
 @import url(../blocks/modal/__form/modal__form.css);
 @import url(../blocks/modal/__input-group/modal__input-group.css);
 @import url(../blocks/modal/__input/modal__input.css);

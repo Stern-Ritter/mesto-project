@@ -16,20 +16,22 @@
 
     <main class="content">
       <section class="profile page__section">
-        <img
-          class="profile__avatar"
-          src="<%=require('../images/explorer.jpg')%>"
-          alt="Картинка пользователя"
-        />
+        <div class="profile__avatar-holder">
+          <img class="profile__avatar" src="#" alt="Картинка пользователя" />
+          <button
+            class="button button_type_edit profile__avatar-edit-btn"
+            type="button"
+          ></button>
+        </div>
         <div class="profile__info">
           <div class="profile__info-holder">
-            <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+            <h1 class="profile__user-name">Имя</h1>
             <button
               class="button button_type_edit profile__edit-btn"
               type="button"
             ></button>
           </div>
-          <p class="profile__user-subline">Исследователь океана</p>
+          <p class="profile__user-subline">Подпись</p>
         </div>
         <button
           class="button button_type_add profile__add-btn"
@@ -53,7 +55,9 @@
           type="button"
           title="Закрыть"
         ></button>
-        <h2 class="modal__header">Редактировать профиль</h2>
+        <h2 class="modal__header modal__header_target_form">
+          Редактировать профиль
+        </h2>
         <form
           name="userEdit"
           action="#"
@@ -103,7 +107,7 @@
           type="button"
           title="Закрыть"
         ></button>
-        <h2 class="modal__header">Новое место</h2>
+        <h2 class="modal__header modal__header_target_form">Новое место</h2>
         <form
           name="placeAdd"
           action="#"
@@ -156,6 +160,55 @@
       </figure>
     </div>
 
+    <div class="modal modal_type_avatar-update">
+      <div class="modal__wrapper">
+        <button
+          class="modal__close button button_type_close"
+          type="button"
+          title="Закрыть"
+        ></button>
+        <h2 class="modal__header modal__header_target_form">Обновить аватар</h2>
+        <form
+          name="avatarUpdate"
+          action="#"
+          method="post"
+          autocomplete="off"
+          class="modal__form"
+          novalidate
+        >
+          <fieldset class="modal__input-group">
+            <input
+              class="modal__input"
+              id="avatar-img"
+              name="avatarImg"
+              placeholder="Ссылка на аватар"
+              type="url"
+              required
+            />
+            <span class="avatar-img-error modal__input-error"></span>
+          </fieldset>
+          <input
+            class="modal__save-btn"
+            type="submit"
+            name="avatarSave"
+            value="Сохранить"
+          />
+        </form>
+      </div>
+    </div>
+
+    <div class="modal modal_type_card-delete">
+      <div class="modal__wrapper">
+        <button
+          class="modal__close button button_type_close"
+          type="button"
+          title="Закрыть"
+        ></button>
+        <h2 class="modal__header modal__header_target_confirm">Вы уверены?</h2>
+        <button class="modal__accept-btn" type="button">Да</button>
+      </div>
+    </div>
+
     <template id="photo-grid-item">
       <li class="photo-grid__list-item">
         <article class="place">
@@ -163,7 +216,10 @@
           <button class="button place__delete-btn" type="button"></button>
           <div class="place__image-caption">
             <h2 class="place__image-name"></h2>
-            <button class="button place__like-btn" type="button"></button>
+            <div class="place__like-holder">
+              <button class="button place__like-btn" type="button"></button>
+              <span class="place__like-count"></span>
+            </div>
           </div>
         </article>
       </li>

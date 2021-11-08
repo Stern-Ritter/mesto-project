@@ -1,21 +1,7 @@
 .button_type_edit {
-  width: 18px;
-  height: 18px;
   background-image: url(../../../images/edit-button.svg);
-  background-size: 7.5px 7.5px;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: transparent;
   transition: opacity 0.3s ease-in-out;
-}
-
-.button_type_edit:hover {
-  opacity: 0.6;
-}
-
-@media (min-width: 620px) {
-  .button_type_edit {
-    width: 24px;
-    height: 24px;
-    background-size: 10px 10px;
-  }
 }
