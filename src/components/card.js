@@ -1,9 +1,37 @@
 import { cardClasses } from './constants.js';
+import { deleteLike, putLike } from './api.js';
+
+// Функция обновления количества лайков в карточке места
+export function updatePhotoGridItemLikeCount(card, count) {
+  const likes = card.querySelector(`.${cardClasses.photoGridItemLikeCountClass}`);
+  if(count > 0) {
+    likes.classList.add('place__like-count_visible');
+    likes.textContent = count;
+  } else {
+    likes.classList.remove('place__like-count_visible');
+    likes.textContent = '';
+  }
+}
+
+// Функция изменения видимости кнопки удаления карточки места
+function setVisibilityPhotoGridItemDeleteBtn(card, ownerId, userId) {
+  if(ownerId === userId) {
+    const deleteButton = card.querySelector(`.${cardClasses. photoGridItemDeleteBtnClass}`);
+    deleteButton.classList.add('place__delete-btn_visible');
+  }
+}
+
+// Функция изменения отображения состояния активности кнопки лайка карточки места
+function setStatePhotoGridItemLikeBtn(likeBtn, likes, userId) {
+  if(likes.map((like) => like._id).includes(userId)) {
+    likeBtn.classList.add(`${cardClasses.activeLikeBtnClass}`);
+  }
+}
 
 // Функция создания новой карточки места на основе переданных аргументов:
 // 1. 'name' (String) - имя места;
 // 2. 'link' (String) - ссылка на изображение места на удаленном сервере.
-function createPhotoGridItem(name, link) {
+function createPhotoGridItem({ _id, name, link, likes, owner }) {
   const photoGridItemTemplate = document
     .querySelector(`#${cardClasses.photoGridTemplate}`).content;
   const photoGridItem = photoGridItemTemplate
@@ -11,9 +39,15 @@ function createPhotoGridItem(name, link) {
     .cloneNode(true);
   const image = photoGridItem.querySelector(`.${cardClasses.photoGridItemImgClass}`);
   const imageCaption = photoGridItem.querySelector(`.${cardClasses.photoGridItemImgNameClass}`);
+  const likeBtn = photoGridItem.querySelector(`.${cardClasses.photoGridItemLikeBtnClass}`);
+  const userId = sessionStorage.getItem('userId');
   image.src = link;
   image.alt = name;
   imageCaption.textContent = name;
+  photoGridItem.dataset.id = _id;
+  setVisibilityPhotoGridItemDeleteBtn(photoGridItem, owner._id, userId);
+  setStatePhotoGridItemLikeBtn(likeBtn, likes, userId);
+  updatePhotoGridItemLikeCount(photoGridItem, likes.length);
   return photoGridItem;
 }
 
@@ -21,17 +55,20 @@ function createPhotoGridItem(name, link) {
 // 1. parent (DOM-элемент) - родительский элемент
 // 2. cards (rest parameters, DOM-элементы) - добавляемые карточки мест
 export function addPhotoGridItem(parent, ...cards) {
-  cards.forEach((card) => {
-    parent.prepend(createPhotoGridItem(card.name, card.link));
-  });
+  cards
+    .reverse()
+    .forEach((card) => {
+      parent.prepend(createPhotoGridItem(card));
+    });
 }
 
-// Фунукция удаления карточки места
-export function removePhotoGridItem(event) {
-  event.target.closest(`.${cardClasses.photoGridItemClass}`).remove();
-}
-
-// Функция переключения состояния лайка карточки места
-export function likePhotoGridItem(event) {
-  event.target.classList.toggle(`${cardClasses.activeLikeBtnClass}`);
+// Функция переключения состояния активности кнопки лайка карточки места
+export function likePhotoGridItem(event, cardId) {
+  if(event.target.classList.contains(`${cardClasses.activeLikeBtnClass}`)) {
+    event.target.classList.remove(`${cardClasses.activeLikeBtnClass}`);
+    return deleteLike(cardId);
+  } else {
+    event.target.classList.add(`${cardClasses.activeLikeBtnClass}`);
+    return putLike(cardId);
+  }
 }

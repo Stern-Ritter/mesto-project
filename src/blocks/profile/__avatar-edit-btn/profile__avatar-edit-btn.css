@@ -1,0 +1,21 @@
+.profile__avatar-edit-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 19px 19px;
+  border: none;
+  opacity: 0;
+}
+
+.profile__avatar-edit-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+}
+
+@media (min-width: 620px) {
+  .profile__avatar-edit-btn {
+    background-size: 26px 26px;
+  }
+}

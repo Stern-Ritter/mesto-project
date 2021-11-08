@@ -1,0 +1,9 @@
+.modal__header_target_confirm {
+  margin: 0 0 54px 0;
+}
+
+@media (min-width: 620px) {
+  .modal__header_target_confirm {
+    margin-bottom: 36px;
+  }
+}

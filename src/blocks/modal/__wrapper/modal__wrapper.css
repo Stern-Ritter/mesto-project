@@ -2,7 +2,8 @@
   margin: auto;
   width: 100%;
   max-width: 282px;
-  min-height: 322px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,6 +17,7 @@
 @media (min-width: 620px) {
   .modal__wrapper {
     max-width: 430px;
-    min-height: 330px;
+    padding-top: 34px;
+    padding-bottom: 37px;
   }
 }

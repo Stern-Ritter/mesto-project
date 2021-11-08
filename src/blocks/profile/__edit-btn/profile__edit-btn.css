@@ -1,4 +1,18 @@
 .profile__edit-btn {
-  background-color: transparent;
+  width: 18px;
+  height: 18px;
+  background-size: 7.5px 7.5px;
   border: 1px solid #ffffff;
+}
+
+.profile__edit-btn:hover {
+  opacity: 0.6;
+}
+
+@media (min-width: 620px) {
+  .profile__edit-btn {
+    width: 24px;
+    height: 24px;
+    background-size: 10px 10px;
+  }
 }
