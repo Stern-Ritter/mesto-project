@@ -11,7 +11,3 @@ export function drawProfile(profile) {
   profileUserAvatar.alt = profile.name;
   profileUserAvatar.src = profile.avatar;
 }
-
-export function drawAvatar(avatar) {
-  profileUserAvatar.src = avatar;
-}

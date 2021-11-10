@@ -14,15 +14,16 @@ export function updatePhotoGridItemLikeCount(card, count) {
 }
 
 // Функция изменения видимости кнопки удаления карточки места
-function setVisibilityPhotoGridItemDeleteBtn(card, ownerId, userId) {
+function setPhotoGridItemDeleteBtnVisibility(card, ownerId, userId) {
   if(ownerId === userId) {
     const deleteButton = card.querySelector(`.${cardClasses. photoGridItemDeleteBtnClass}`);
     deleteButton.classList.add('place__delete-btn_visible');
   }
 }
 
-// Функция изменения отображения состояния активности кнопки лайка карточки места
-function setStatePhotoGridItemLikeBtn(likeBtn, likes, userId) {
+// Функция изменения изначального отображения состояния активности
+// кнопки лайка карточки места
+function setPhotoGridItemLikeBtnInitState(likeBtn, likes, userId) {
   if(likes.map((like) => like._id).includes(userId)) {
     likeBtn.classList.add(`${cardClasses.activeLikeBtnClass}`);
   }
@@ -45,8 +46,8 @@ function createPhotoGridItem({ _id, name, link, likes, owner }) {
   image.alt = name;
   imageCaption.textContent = name;
   photoGridItem.dataset.id = _id;
-  setVisibilityPhotoGridItemDeleteBtn(photoGridItem, owner._id, userId);
-  setStatePhotoGridItemLikeBtn(likeBtn, likes, userId);
+  setPhotoGridItemDeleteBtnVisibility(photoGridItem, owner._id, userId);
+  setPhotoGridItemLikeBtnInitState(likeBtn, likes, userId);
   updatePhotoGridItemLikeCount(photoGridItem, likes.length);
   return photoGridItem;
 }
@@ -65,10 +66,13 @@ export function addPhotoGridItem(parent, ...cards) {
 // Функция переключения состояния активности кнопки лайка карточки места
 export function likePhotoGridItem(event, cardId) {
   if(event.target.classList.contains(`${cardClasses.activeLikeBtnClass}`)) {
-    event.target.classList.remove(`${cardClasses.activeLikeBtnClass}`);
     return deleteLike(cardId);
   } else {
-    event.target.classList.add(`${cardClasses.activeLikeBtnClass}`);
     return putLike(cardId);
   }
+}
+
+// Функция изменения отображения состояния активности кнопки лайка карточки места
+export function switchPhotoGridItemLikeBtnState(event) {
+  event.target.classList.toggle(`${cardClasses.activeLikeBtnClass}`);
 }
