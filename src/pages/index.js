@@ -47,7 +47,6 @@ const modals = document.querySelectorAll(`.${modalClasses.modalClass}`);
 
 // Модальное окно редактирования данных пользователя
 const profileEdit = document.querySelector(`.${modalClasses.profileEditClass}`);
-const profileEditCloseBtn = profileEdit.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const profileEditForm = document.forms.userEdit;
 const profileEditUserName = profileEditForm.elements.userName;
 const profileEditSubline = profileEditForm.elements.userSubline;
@@ -55,7 +54,6 @@ const profileEditSaveBtn = profileEditForm.elements.userSave;
 
 // Модальное окно добавления новой карточки места
 const placeAdd = document.querySelector(`.${modalClasses.placeAddClass}`);
-const placeAddCloseBtn = placeAdd.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const placeAddForm = document.forms.placeAdd;
 const placeAddName = placeAddForm.elements.placeName;
 const placeAddImgLink = placeAddForm.elements.placeImg;
@@ -63,18 +61,15 @@ const placeAddSaveBtn = placeAddForm.elements.placeSave;
 
 // Модальное окно с информацией о выбранном месте
 const placeShow = document.querySelector(`.${modalClasses.placeShowClass}`);
-const placeShowCloseBtn = placeShow.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 
 // Модальное окно изменения аватара профиля
 const avatarUpdate = document.querySelector(`.${modalClasses.avatarUpdateClass}`);
-const avatarUpdateCloseBtn = avatarUpdate.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const avatarUpdateForm = document.forms.avatarUpdate;
 const avatarUpdateImgLink = avatarUpdateForm.elements.avatarImg;
 const avatarUpdateSaveBtn = avatarUpdateForm.elements.avatarSave;
 
 // Модальное окно подтверждения удаления карточки места
 const cardDelete = document.querySelector(`.${modalClasses.cardDeleteClass}`);
-const cardDeleteCloseBtn = cardDelete.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const cardDeleteAcceptBtn = cardDelete.querySelector(`.${modalClasses.modalAcceptBtnClass}`);
 
 // Панель карточек мест
