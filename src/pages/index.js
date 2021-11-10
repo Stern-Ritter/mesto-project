@@ -2,13 +2,13 @@ import './index.css';
 import {
   addPhotoGridItem,
   likePhotoGridItem,
+  switchPhotoGridItemLikeBtnState,
   updatePhotoGridItemLikeCount
 } from '../components/card.js';
 import {
   openModal,
   openPlaceModal,
   closeModal,
-  closeModalOnOverlayClick,
   clearForm,
   switchButtonText
 } from '../components/modal.js';
@@ -30,8 +30,7 @@ import {
   checkAnswerStatus
 } from '../components/api.js';
 import {
-  drawProfile,
-  drawAvatar
+  drawProfile
 } from '../components/profile.js';
 
 // ** DOM-элементы
@@ -43,9 +42,11 @@ const profileAvatarEditBtn = profile.querySelector(`.${profileClasses.profileAva
 const profileEditBtn = profile.querySelector(`.${profileClasses.profileEditBtnClass}`);
 const profileAddBtn = profile.querySelector(`.${profileClasses.profileAddBtnClass}`);
 
+// Модальные окна на странице
+const modals = document.querySelectorAll(`.${modalClasses.modalClass}`);
+
 // Модальное окно редактирования данных пользователя
 const profileEdit = document.querySelector(`.${modalClasses.profileEditClass}`);
-const profileEditCloseBtn = profileEdit.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const profileEditForm = document.forms.userEdit;
 const profileEditUserName = profileEditForm.elements.userName;
 const profileEditSubline = profileEditForm.elements.userSubline;
@@ -53,7 +54,6 @@ const profileEditSaveBtn = profileEditForm.elements.userSave;
 
 // Модальное окно добавления новой карточки места
 const placeAdd = document.querySelector(`.${modalClasses.placeAddClass}`);
-const placeAddCloseBtn = placeAdd.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const placeAddForm = document.forms.placeAdd;
 const placeAddName = placeAddForm.elements.placeName;
 const placeAddImgLink = placeAddForm.elements.placeImg;
@@ -61,24 +61,33 @@ const placeAddSaveBtn = placeAddForm.elements.placeSave;
 
 // Модальное окно с информацией о выбранном месте
 const placeShow = document.querySelector(`.${modalClasses.placeShowClass}`);
-const placeShowCloseBtn = placeShow.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 
 // Модальное окно изменения аватара профиля
 const avatarUpdate = document.querySelector(`.${modalClasses.avatarUpdateClass}`);
-const avatarUpdateCloseBtn = avatarUpdate.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const avatarUpdateForm = document.forms.avatarUpdate;
 const avatarUpdateImgLink = avatarUpdateForm.elements.avatarImg;
 const avatarUpdateSaveBtn = avatarUpdateForm.elements.avatarSave;
 
 // Модальное окно подтверждения удаления карточки места
 const cardDelete = document.querySelector(`.${modalClasses.cardDeleteClass}`);
-const cardDeleteCloseBtn = cardDelete.querySelector(`.${modalClasses.modalCloseBtnClass}`);
 const cardDeleteAcceptBtn = cardDelete.querySelector(`.${modalClasses.modalAcceptBtnClass}`);
 
 // Панель карточек мест
 const photoGridList = document.querySelector(`.${cardClasses.photoGridListClass}`);
 
 // ** Обработчики действий пользователя
+// * Обработчики закрытия модальных окон по клику на:
+// 1) кнопку закрытия;
+// 2) оверлей.
+modals.forEach((modal) => {
+  modal.addEventListener('click', (event) => {
+    if(event.target.classList.contains(modalClasses.modalCloseBtnClass) ||
+    event.target.classList.contains(modalClasses.openedModalClass)) {
+        closeModal(modal);
+      }
+  });
+});
+
 // * Обработчики модального окна редактирования данных пользователя
 // Обработчик открытия модального окна редактирования данных пользователя
 profileEditBtn.addEventListener('click', () => {
@@ -89,12 +98,8 @@ profileEditBtn.addEventListener('click', () => {
 });
 
 // Обработчик закрытия модального окна редактирования данных пользователя,
-// без сохранения результатов редактирования
-profileEditCloseBtn.addEventListener('click', () => closeModal(profileEdit));
-
-// Обработчик закрытия модального окна редактирования данных пользователя,
 // с сохранением результатов редактирования
-profileEditSaveBtn.addEventListener('click', () => {
+profileEditForm.addEventListener('submit', () => {
   const oldButtonText = switchButtonText(profileEditSaveBtn, 'Сохранение...');
   patchUser(profileEditUserName.value, profileEditSubline.value)
     .then((res) => checkAnswerStatus(res))
@@ -106,10 +111,6 @@ profileEditSaveBtn.addEventListener('click', () => {
     .finally(() => switchButtonText(profileEditSaveBtn, oldButtonText));
 });
 
-// Обработчик закрытия модального окна редактирования данных пользователя,
-// по клику на оверлей
-profileEdit.addEventListener('click', closeModalOnOverlayClick);
-
 // * Обработчики модального окна добавления новой карточки места
 // Обработчик открытия модального окна добавления новой карточки места
 profileAddBtn.addEventListener('click', () => {
@@ -118,14 +119,8 @@ profileAddBtn.addEventListener('click', () => {
 });
 
 // Обработчик закрытия модального окна добавления новой карточки места,
-// без сохранения карточки
-placeAddCloseBtn.addEventListener('click', () => {
-  closeModal(placeAdd);
-});
-
-// Обработчик закрытия модального окна добавления новой карточки места,
 // с сохранением карточки
-placeAddSaveBtn.addEventListener('click', () => {
+placeAddForm.addEventListener('submit', () => {
   const oldButtonText = switchButtonText(placeAddSaveBtn, 'Сохранение...');
   postCard(placeAddName.value, placeAddImgLink.value)
     .then((res) => checkAnswerStatus(res))
@@ -136,10 +131,6 @@ placeAddSaveBtn.addEventListener('click', () => {
     .catch((err) => console.log(err))
     .finally(() => switchButtonText(placeAddSaveBtn, oldButtonText));
 });
-
-// Обработчик закрытия модального окна добавления новой карточки места,
-// по клику на оверлей
-placeAdd.addEventListener('click', closeModalOnOverlayClick);
 
 // * Обработчики модального окна с информацией о выбранном месте
 // Обработчик открытия модального окна с информацией о выбранной карточке места;
@@ -154,7 +145,10 @@ photoGridList.addEventListener('click', (event) => {
     const cardId = card.dataset.id;
     likePhotoGridItem(event, cardId)
       .then((res) => checkAnswerStatus(res))
-      .then((data) => updatePhotoGridItemLikeCount(card, data.likes.length))
+      .then((data) => {
+        switchPhotoGridItemLikeBtnState(event);
+        updatePhotoGridItemLikeCount(card, data.likes.length);
+      })
       .catch((err) => console.log(err));
   }
   if (event.target.classList.contains(`${cardClasses.photoGridItemDeleteBtnClass}`)) {
@@ -164,13 +158,6 @@ photoGridList.addEventListener('click', (event) => {
   }
 });
 
-// Обработчик закрытия модального окна с информацией о выбранной карточке места
-placeShowCloseBtn.addEventListener('click', () => closeModal(placeShow));
-
-// Обработчик закрытия модального окна с информацией о выбранной карточке места,
-// по клику на оверлей
-placeShow.addEventListener('click', closeModalOnOverlayClick);
-
 // *Обработчики модального окна изменения аватара профиля
 // Обработчик открытия модального окна изменения аватара профиля
 profileAvatarEditBtn.addEventListener('click', () => {
@@ -178,30 +165,19 @@ profileAvatarEditBtn.addEventListener('click', () => {
   openModal(avatarUpdate);
 });
 
-// Обработчик закрытия модального окна измнения аватара профиля,
-// без сохранения аватара
-avatarUpdateCloseBtn.addEventListener('click', () => {
-  closeModal(avatarUpdate);
-});
-
 // Обработчик закрытия модального окна изменения аватара профиля,
 // с сохранением аватара
-avatarUpdateSaveBtn.addEventListener('click', () => {
+avatarUpdateForm.addEventListener('submit', () => {
   const oldButtonText = switchButtonText(avatarUpdateSaveBtn, 'Сохранение...');
   updateUserAvatar(avatarUpdateImgLink.value)
     .then((res) => checkAnswerStatus(res))
-    .then((data) => {
-      drawAvatar(data.avatar);
+    .then((profile) => {
+      drawProfile(profile);
       closeModal(avatarUpdate);
     })
     .catch((err) => console.log(err))
     .finally(() => switchButtonText(avatarUpdateSaveBtn, oldButtonText));
 });
-
-// Обработчик закрытия модального окна изменения аватара профиля,
-// по клику на оверлей
-avatarUpdate.addEventListener('click', closeModalOnOverlayClick);
-
 
 // * Обработчики модального окна подтверждения удаления карточки места
 // Обработчик закрытия модального окна подтверждения удаления карточки места
@@ -217,14 +193,6 @@ cardDeleteAcceptBtn.addEventListener('click', () =>  {
     })
     .catch((err) => console.log(err));
 });
-
-// Обработчик закрытия модального окна подтверждения удаления карточки места
-// без подтверждения удаления
-cardDeleteCloseBtn.addEventListener('click', () => closeModal(cardDelete));
-
-// Обработчик закрытия модального окна подтверждения удаления карточки места
-// по клику на оверлей без подтверждения удаления
-cardDelete.addEventListener('click', closeModalOnOverlayClick);
 
 // ** Начальная инициализация
 // Включение валидации полей ввода форм

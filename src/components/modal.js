@@ -18,13 +18,6 @@ function closeModalOnEsc(event) {
   }
 }
 
-// Функция закрытия модального окна кликом на оверлей
-export function closeModalOnOverlayClick(event) {
-  if (event.target.classList.contains(modalClasses.modalClass)) {
-    closeModal(event.target);
-  }
-}
-
 // Функция открытия модального окна
 export function openModal(modal) {
   document.addEventListener('keydown', closeModalOnEsc);
